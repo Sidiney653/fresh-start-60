@@ -62,6 +62,16 @@ function prevSlide(){current=(current-1+imgs.length)%imgs.length;updateCarousel(
 if(track&&imgs.length){
  document.querySelector('.preview-next')?.addEventListener('click',()=>{clearInterval(interval);nextSlide();startInterval()});
  document.querySelector('.preview-prev')?.addEventListener('click',()=>{clearInterval(interval);prevSlide();startInterval()});
- function startInterval(){interval=setInterval(nextSlide,2500)}
- startInterval();
+  function startInterval(){interval=setInterval(nextSlide,2500)}
+  startInterval();
+}
+const ttrack=document.querySelector('.testimonial-track');
+const timgs=document.querySelectorAll('.testimonial-carousel .testimonial-card');
+let tcurrent=0;
+function tupdateCarousel(){ttrack.style.transform='translateX(-'+tcurrent*100+'%)'}
+function tnextSlide(){tcurrent=(tcurrent+1)%timgs.length;tupdateCarousel()}
+function tprevSlide(){tcurrent=(tcurrent-1+timgs.length)%timgs.length;tupdateCarousel()}
+if(ttrack&&timgs.length){
+  document.querySelector('.testimonial-next')?.addEventListener('click',()=>{tnextSlide()});
+  document.querySelector('.testimonial-prev')?.addEventListener('click',()=>{tprevSlide()});
 }
