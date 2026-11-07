@@ -53,19 +53,13 @@ document.querySelectorAll('a[href="#oferta"]').forEach(link=>link.addEventListen
 const year=document.getElementById('year');
 if(year)year.textContent=new Date().getFullYear();
 const track=document.querySelector('.preview-track');
-const dotsContainer=document.querySelector('.preview-dots');
 const imgs=document.querySelectorAll('.preview-track img');
 let current=0;
 let interval;
-function updateCarousel(){
- track.style.transform='translateX(-'+current*100+'%)';
- dotsContainer.querySelectorAll('.preview-dot').forEach((d,i)=>d.classList.toggle('active',i===current));
-}
+function updateCarousel(){track.style.transform='translateX(-'+current*100+'%)'}
 function nextSlide(){current=(current+1)%imgs.length;updateCarousel()}
 function prevSlide(){current=(current-1+imgs.length)%imgs.length;updateCarousel()}
-if(track&&dotsContainer&&imgs.length){
- imgs.forEach(()=>{const d=document.createElement('button');d.className='preview-dot';dotsContainer.appendChild(d)});
- dotsContainer.children[0]&&dotsContainer.children[0].classList.add('active');
+if(track&&imgs.length){
  document.querySelector('.preview-next')?.addEventListener('click',()=>{clearInterval(interval);nextSlide();startInterval()});
  document.querySelector('.preview-prev')?.addEventListener('click',()=>{clearInterval(interval);prevSlide();startInterval()});
  function startInterval(){interval=setInterval(nextSlide,4000)}
