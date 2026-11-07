@@ -10,3 +10,7 @@
 
 /* Destaque visual para a numeração das etapas de entrega */
 .delivery-grid article>span{display:grid;place-items:center;width:42px;height:42px;border-radius:10px;background:#eaf2fc;color:#244b91;font-size:1.65rem;font-weight:900;line-height:1;}
+/* Barra superior de aviso da oferta */
+.announcement-bar{width:100%;min-height:38px;display:flex;align-items:center;justify-content:center;gap:7px;padding:8px 12px;background:#244b91;color:#fff;border-bottom:3px solid #d6a83b;text-align:center;font-size:.88rem;font-weight:900;line-height:1;white-space:nowrap;letter-spacing:.01em}
+.announcement-bar span{color:#ffd75e;flex:0 0 auto}
+@media(max-width:600px){.announcement-bar{min-height:34px;padding:8px 5px;gap:5px;font-size:clamp(9px,2.85vw,11.5px);letter-spacing:0;white-space:nowrap}}
