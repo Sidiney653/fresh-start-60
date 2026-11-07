@@ -9,6 +9,10 @@
 </head>
 <body>
 
+<div class="topbar" id="topbar" hidden>
+  Oferta válida até <strong id="offer-end"></strong>
+</div>
+
 <main>
 
   <!-- HERO -->
@@ -57,7 +61,7 @@
       </a>
 
       <p class="micro">
-        Material digital · Estude no seu ritmo
+        🔒 Compra 100% segura · <span class="cfg-guarantee">7</span> dias de garantia
       </p>
     </div>
   </section>
@@ -173,29 +177,15 @@
   <section class="section light" id="conteudo">
     <div class="wrap">
       <span class="eyebrow">CONTEÚDO ORGANIZADO</span>
-      <h2>O que você encontra nos mapas?</h2>
+      <h2>Conteúdo do básico ao avançado</h2>
 
       <p class="sub">
-        Explore os assuntos para aprender e revisar inglês.
+        Clique em cada nível (A1 a C2) para ver os temas.
       </p>
 
-      <div class="topics">
-        <button class="topic selected">Fundamentos</button>
-        <button class="topic">Gramática</button>
-        <button class="topic">Vocabulário</button>
-        <button class="topic">Conversação</button>
-      </div>
+      <div class="topics" id="levels"></div>
 
-      <div class="topic-panel" id="topic-panel">
-        <h3>Fundamentos do inglês</h3>
-        <p>Uma base visual para estudar conceitos essenciais.</p>
-        <ul>
-          <li>Pronomes e artigos</li>
-          <li>Verbo To Be</li>
-          <li>Estrutura de frases</li>
-          <li>Perguntas e respostas simples</li>
-        </ul>
-      </div>
+      <div class="topic-panel" id="topic-panel"></div>
 
       <a class="btn" href="#oferta">
         QUERO ACESSAR O MATERIAL →
@@ -248,49 +238,13 @@
   <section class="section light" id="bonus">
     <div class="wrap">
       <span class="eyebrow">MATERIAIS COMPLEMENTARES</span>
-      <h2>Seus bônus em destaque</h2>
+      <h2>Bônus especiais inclusos</h2>
 
       <p class="sub">
-        Inclua aqui os bônus reais disponíveis na sua oferta.
+        Você recebe junto com o material principal, sem custo adicional.
       </p>
 
-      <div class="bonus-grid">
-        <article class="bonus">
-          <div class="bonus-cover pink">BÔNUS 01</div>
-          <div>
-            <small>BÔNUS #1</small>
-            <h3>Nome do primeiro bônus</h3>
-            <p>Descreva o benefício deste material.</p>
-          </div>
-        </article>
-
-        <article class="bonus">
-          <div class="bonus-cover blue">BÔNUS 02</div>
-          <div>
-            <small>BÔNUS #2</small>
-            <h3>Nome do segundo bônus</h3>
-            <p>Descreva o benefício deste material.</p>
-          </div>
-        </article>
-
-        <article class="bonus">
-          <div class="bonus-cover yellow">BÔNUS 03</div>
-          <div>
-            <small>BÔNUS #3</small>
-            <h3>Nome do terceiro bônus</h3>
-            <p>Descreva o benefício deste material.</p>
-          </div>
-        </article>
-
-        <article class="bonus">
-          <div class="bonus-cover green">BÔNUS 04</div>
-          <div>
-            <small>BÔNUS #4</small>
-            <h3>Nome do quarto bônus</h3>
-            <p>Descreva o benefício deste material.</p>
-          </div>
-        </article>
-      </div>
+      <div class="bonus-grid" id="bonus-grid"></div>
 
       <a class="btn" href="#oferta">
         CONFERIR MINHA OFERTA →
@@ -312,16 +266,16 @@
         </div>
 
         <div class="offer-content">
-          <span class="pill">FORMATO DIGITAL</span>
-          <p class="price-caption">Seu material completo</p>
-          <div class="price">Consulte a oferta</div>
+          <span class="pill">PAGAMENTO ÚNICO · ACESSO VITALÍCIO</span>
 
           <div class="summary">
-            <h3>Incluído no acesso</h3>
-            <p>✓ Material principal de mapas mentais</p>
-            <p>✓ Acesso digital</p>
-            <p>✓ Bônus incluídos na oferta</p>
+            <h3>Tudo o que você recebe</h3>
+            <ul class="stack" id="value-stack"></ul>
+            <p class="stack-total">Valor total: <s id="price-from"></s></p>
           </div>
+
+          <p class="price-caption">Hoje, por apenas</p>
+          <div class="price" id="price-to">Consulte a oferta</div>
 
           <a
             class="btn checkout"
@@ -333,8 +287,7 @@
           </a>
 
           <p class="micro">
-            Configure o preço e o checkout oficial
-            antes de publicar.
+            🔒 Compra segura · <span class="cfg-guarantee">7</span> dias de garantia
           </p>
         </div>
       </div>
@@ -350,8 +303,9 @@
       <div class="guarantee">
         <span>🛡️</span>
         <p>
-          Adicione aqui a política real de garantia,
-          reembolso e condições de compra.
+          Você tem <strong><span class="cfg-guarantee">7</span> dias</strong> para testar.
+          Se não gostar, peça o reembolso integral dentro desse prazo,
+          conforme o Código de Defesa do Consumidor (art. 49).
         </p>
       </div>
 
@@ -457,8 +411,10 @@
         revisar assuntos e organizar seu aprendizado.
       </p>
 
+      <ul class="stack final-list" id="final-list"></ul>
+
       <a class="btn" href="#oferta">
-        VER A OFERTA COMPLETA →
+        GARANTIR MEU ACESSO AGORA →
       </a>
     </div>
   </section>
@@ -472,10 +428,14 @@
       Material educacional complementar.
       O aprendizado depende de estudo e prática.
     </p>
-    <p>
-      Adicione os dados do responsável,
-      contato, termos e política de privacidade.
-    </p>
+    <p id="legal-line"></p>
+    <nav class="footer-links">
+      <a id="link-terms" href="#">Termos de Uso</a>
+      <a id="link-privacy" href="#">Política de Privacidade</a>
+      <a id="link-contact" href="#">Contato</a>
+    </nav>
+    <p>Este site não é afiliado ao Facebook/Meta. Resultados dependem de estudo e prática.</p>
+    <p>© <span id="year"></span> · Todos os direitos reservados</p>
   </div>
 </footer>
 

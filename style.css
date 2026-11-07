@@ -706,3 +706,16 @@ footer strong {
   .hero-art { height: 270px; }
   .offer-cover strong { font-size: 1.65rem; }
 }
+
+/* --- estrutura nova --- */
+.topbar { background:#1f2a44; color:#fff; text-align:center; padding:10px 16px; font-size:.95rem; }
+.stack { list-style:none; padding:0; margin:0 0 12px; text-align:left; }
+.stack li { padding:6px 0; border-bottom:1px dashed #dbe3ee; display:flex; justify-content:space-between; gap:12px; }
+.stack li s { color:#8996a7; white-space:nowrap; }
+.stack-total { text-align:right; color:var(--muted); }
+.final-list { max-width:520px; margin:0 auto 24px; }
+.final-list li { justify-content:flex-start; }
+.bonus-value b { color:#23a180; margin-left:6px; }
+.bonus-value s { color:#8996a7; }
+.footer-links { display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin:10px 0; }
+.footer-links a { color:inherit; }
