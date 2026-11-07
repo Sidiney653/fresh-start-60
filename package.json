@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "bunx vite --host 0.0.0.0",
-    "build": "rm -rf dist && mkdir -p dist && cp index.html style.css script.js dist/",
-    "build:dev": "rm -rf dist && mkdir -p dist && cp index.html style.css script.js dist/"
+    "build": "rm -rf dist && mkdir -p dist && cp index.html style.css script.js dist/ && cp -r uploads dist/",
+    "build:dev": "rm -rf dist && mkdir -p dist && cp index.html style.css script.js dist/ && cp -r uploads dist/"
   }
 }
