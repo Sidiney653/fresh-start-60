@@ -52,19 +52,23 @@ if(toast){
 document.querySelectorAll('a[href="#oferta"]').forEach(link=>link.addEventListener('click',()=>{if(toast)toast.classList.add('hidden')}));
 const year=document.getElementById('year');
 if(year)year.textContent=new Date().getFullYear();
-const track=document.querySelector('.preview-track');
-const imgs=document.querySelectorAll('.preview-track img');
-let current=0;
-let interval;
-function updateCarousel(){track.style.transform='translateX(-'+current*100+'%)'}
-function nextSlide(){current=(current+1)%imgs.length;updateCarousel()}
-function prevSlide(){current=(current-1+imgs.length)%imgs.length;updateCarousel()}
-if(track&&imgs.length){
- document.querySelector('.preview-next')?.addEventListener('click',()=>{clearInterval(interval);nextSlide();startInterval()});
- document.querySelector('.preview-prev')?.addEventListener('click',()=>{clearInterval(interval);prevSlide();startInterval()});
-  function startInterval(){interval=setInterval(nextSlide,2500)}
+document.querySelectorAll('.preview-carousel').forEach((carousel)=>{
+ const track=carousel.querySelector('.preview-track');
+ const imgs=carousel.querySelectorAll('.preview-track img');
+ const next=carousel.querySelector('.preview-next');
+ const prev=carousel.querySelector('.preview-prev');
+ let current=0;
+ let interval;
+ function updateCarousel(){track.style.transform='translateX(-'+current*100+'%)'}
+ function nextSlide(){current=(current+1)%imgs.length;updateCarousel()}
+ function prevSlide(){current=(current-1+imgs.length)%imgs.length;updateCarousel()}
+ function startInterval(){interval=setInterval(nextSlide,2500)}
+ if(track&&imgs.length){
+  next?.addEventListener('click',()=>{clearInterval(interval);nextSlide();startInterval()});
+  prev?.addEventListener('click',()=>{clearInterval(interval);prevSlide();startInterval()});
   startInterval();
-}
+ }
+});
 const ttrack=document.querySelector('.testimonial-track');
 const timgs=document.querySelectorAll('.testimonial-carousel .testimonial-card');
 let tcurrent=0;
