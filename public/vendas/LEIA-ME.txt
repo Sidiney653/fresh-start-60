@@ -1,0 +1,11 @@
+MODELO DE PAGINA DE VENDAS - FRESH-START-60
+
+Esta entrega e uma pagina HTML/CSS/JS independente, estruturada com base na sequencia visual e nos tipos de secao da referencia indicada. Nao e uma alteracao aplicada ao repositorio GitHub.
+
+ATENCAO:
+1. Para integrar preservando o projeto atual, e necessario acessar os arquivos originais do repositorio.
+2. Modifique CHECKOUT_URL em script.js para seu checkout oficial.
+3. Substitua os mockups e mapas ilustrativos pelas imagens reais do seu produto.
+4. Confirme a copy, o indice real, nomes dos bonus, preco, garantia, politica de privacidade e dados legais antes de publicar.
+5. Nao foram copiados depoimentos, contagens de alunos, imagens ou marca do concorrente.
+6. Para visualizar localmente, abra index.html em um navegador. As fontes usam Google Fonts, com fallback local.
