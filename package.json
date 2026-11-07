@@ -2,7 +2,7 @@
   "name": "mapa-mental",
   "private": true,
   "scripts": {
-    "dev": "bunx serve -l 8080 .",
+    "dev": "bunx vite --host 0.0.0.0",
     "build": "rm -rf dist && mkdir -p dist && cp index.html style.css script.js dist/",
     "build:dev": "rm -rf dist && mkdir -p dist && cp index.html style.css script.js dist/"
   }
