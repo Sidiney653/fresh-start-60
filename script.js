@@ -62,6 +62,6 @@ function prevSlide(){current=(current-1+imgs.length)%imgs.length;updateCarousel(
 if(track&&imgs.length){
  document.querySelector('.preview-next')?.addEventListener('click',()=>{clearInterval(interval);nextSlide();startInterval()});
  document.querySelector('.preview-prev')?.addEventListener('click',()=>{clearInterval(interval);prevSlide();startInterval()});
- function startInterval(){interval=setInterval(nextSlide,4000)}
+ function startInterval(){interval=setInterval(nextSlide,2500)}
  startInterval();
 }
