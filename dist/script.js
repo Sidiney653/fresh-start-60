@@ -52,30 +52,69 @@ if(toast){
 document.querySelectorAll('a[href="#oferta"]').forEach(link=>link.addEventListener('click',()=>{if(toast)toast.classList.add('hidden')}));
 const year=document.getElementById('year');
 if(year)year.textContent=new Date().getFullYear();
+
+/* Carrossel de páginas: percorre todas as imagens automaticamente e permite controle manual */
+const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function activateCarouselImages(carousel){
+ carousel.querySelectorAll('img').forEach(img=>{img.loading='eager';img.decoding='async';});
+}
 document.querySelectorAll('.preview-carousel').forEach((carousel)=>{
  const track=carousel.querySelector('.preview-track');
- const imgs=carousel.querySelectorAll('.preview-track img');
+ const imgs=Array.from(carousel.querySelectorAll('.preview-track img'));
  const next=carousel.querySelector('.preview-next');
  const prev=carousel.querySelector('.preview-prev');
+ if(!track||!imgs.length)return;
  let current=0;
- let interval;
- function updateCarousel(){track.style.transform='translateX(-'+current*100+'%)'}
- function nextSlide(){current=(current+1)%imgs.length;updateCarousel()}
- function prevSlide(){current=(current-1+imgs.length)%imgs.length;updateCarousel()}
- function startInterval(){interval=setInterval(nextSlide,2500)}
- if(track&&imgs.length){
-  next?.addEventListener('click',()=>{clearInterval(interval);nextSlide();startInterval()});
-  prev?.addEventListener('click',()=>{clearInterval(interval);prevSlide();startInterval()});
-  startInterval();
- }
+ let interval=null;
+ const update=()=>{track.style.transform='translate3d(-'+(current*100)+'%,0,0)'};
+ const go=(step)=>{current=(current+step+imgs.length)%imgs.length;update()};
+ const stop=()=>{if(interval){clearInterval(interval);interval=null}};
+ const start=()=>{stop();if(!reducedMotion&&imgs.length>1&&!document.hidden)interval=setInterval(()=>go(1),3500)};
+ next?.addEventListener('click',()=>{go(1);start()});
+ prev?.addEventListener('click',()=>{go(-1);start()});
+ carousel.addEventListener('mouseenter',stop);
+ carousel.addEventListener('mouseleave',start);
+ carousel.addEventListener('focusin',stop);
+ carousel.addEventListener('focusout',start);
+ const observer=new IntersectionObserver(entries=>{
+  if(entries.some(entry=>entry.isIntersecting)){activateCarouselImages(carousel);observer.disconnect();}
+ },{rootMargin:'250px'});
+ observer.observe(carousel);
+ start();
+ document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
 });
-const ttrack=document.querySelector('.testimonial-track');
-const timgs=document.querySelectorAll('.testimonial-carousel .testimonial-card');
-let tcurrent=0;
-function tupdateCarousel(){ttrack.style.transform='translateX(-'+tcurrent*100+'%)'}
-function tnextSlide(){tcurrent=(tcurrent+1)%timgs.length;tupdateCarousel()}
-function tprevSlide(){tcurrent=(tcurrent-1+timgs.length)%timgs.length;tupdateCarousel()}
-if(ttrack&&timgs.length){
-  document.querySelector('.testimonial-next')?.addEventListener('click',()=>{tnextSlide()});
-  document.querySelector('.testimonial-prev')?.addEventListener('click',()=>{tprevSlide()});
-}
+
+/* Carrossel de depoimentos: mostra cada imagem inteira e avança sozinho */
+document.querySelectorAll('.testimonial-carousel').forEach((carousel)=>{
+ const track=carousel.querySelector('.testimonial-track');
+ const cards=Array.from(carousel.querySelectorAll('.testimonial-card'));
+ const next=carousel.querySelector('.testimonial-next');
+ const prev=carousel.querySelector('.testimonial-prev');
+ if(!track||!cards.length)return;
+ let current=0;
+ let interval=null;
+ const go=(step)=>{
+  current=(current+step+cards.length)%cards.length;
+  track.scrollTo({left:cards[current].offsetLeft-track.offsetLeft,behavior:reducedMotion?'auto':'smooth'});
+ };
+ const stop=()=>{if(interval){clearInterval(interval);interval=null}};
+ const start=()=>{stop();if(!reducedMotion&&cards.length>1&&!document.hidden)interval=setInterval(()=>go(1),4200)};
+ next?.addEventListener('click',()=>{go(1);start()});
+ prev?.addEventListener('click',()=>{go(-1);start()});
+ carousel.addEventListener('mouseenter',stop);
+ carousel.addEventListener('mouseleave',start);
+ carousel.addEventListener('focusin',stop);
+ carousel.addEventListener('focusout',start);
+ const observer=new IntersectionObserver(entries=>{
+  if(entries.some(entry=>entry.isIntersecting)){activateCarouselImages(carousel);observer.disconnect();}
+ },{rootMargin:'250px'});
+ observer.observe(carousel);
+ track.addEventListener('scroll',()=>{
+  const center=track.scrollLeft+track.clientWidth/2;
+  let nearest=0,dist=Infinity;
+  cards.forEach((card,i)=>{const d=Math.abs(card.offsetLeft+card.offsetWidth/2-center);if(d<dist){dist=d;nearest=i}});
+  current=nearest;
+ },{passive:true});
+ start();
+ document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
+});
