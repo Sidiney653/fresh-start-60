@@ -149,15 +149,15 @@ document.querySelectorAll('.testimonial-carousel').forEach((carousel)=>{
  /* Intercepta Voltar apenas quando a navegação realmente sai desta página.
     Voltar de âncoras/botões internos apenas reposiciona o histórico e nunca abre a oferta. */
  try{
-  const pagePath=location.pathname+location.search;
-  const armExitGuard=()=>history.pushState({exitOfferGuard:true,pagePath},'',location.href);
+  const armExitGuard=()=>history.pushState({exitOfferGuard:true},'',location.href);
   armExitGuard();
-  window.addEventListener('popstate',()=>{
-   const stillOnThisPage=(location.pathname+location.search)===pagePath;
-   if(stillOnThisPage){
+  window.addEventListener('popstate',(event)=>{
+   /* Voltar de um link interno/hash retorna ao estado de proteção: não mostrar oferta. */
+   if(event.state&&event.state.exitOfferGuard){
     armExitGuard();
     return;
    }
+   /* O estado anterior à proteção foi alcançado: o visitante acionou Voltar para sair. */
    if(!shown&&!alreadyShown())openPopup();
    armExitGuard();
   });
