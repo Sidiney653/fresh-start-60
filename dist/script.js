@@ -146,14 +146,20 @@ document.querySelectorAll('.testimonial-carousel').forEach((carousel)=>{
  closeButtons.forEach(button=>button.addEventListener('click',closePopup));
  popup.addEventListener('click',event=>{if(event.target===popup)closePopup()});
  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&popup.classList.contains('is-visible'))closePopup()});
- /* Cria uma entrada de histórico para interceptar somente o clique em Voltar. */
+ /* Intercepta Voltar apenas quando a navegação realmente sai desta página.
+    Voltar de âncoras/botões internos apenas reposiciona o histórico e nunca abre a oferta. */
  try{
-  history.pushState({exitOfferGuard:true},'',location.href);
+  const pagePath=location.pathname+location.search;
+  const armExitGuard=()=>history.pushState({exitOfferGuard:true,pagePath},'',location.href);
+  armExitGuard();
   window.addEventListener('popstate',()=>{
-   if(!shown&&!alreadyShown()){
-    openPopup();
-    history.pushState({exitOfferGuard:true},'',location.href);
+   const stillOnThisPage=(location.pathname+location.search)===pagePath;
+   if(stillOnThisPage){
+    armExitGuard();
+    return;
    }
+   if(!shown&&!alreadyShown())openPopup();
+   armExitGuard();
   });
  }catch(_){/* Se o navegador bloquear o histórico, a página continua navegável normalmente. */}
 })();
