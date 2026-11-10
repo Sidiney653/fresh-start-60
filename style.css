@@ -23,6 +23,8 @@ h3{font-size:1.15rem;font-weight:800;color:#1d345b;margin:10px 0}
 .btn:hover{transform:translateY(2px);box-shadow:0 3px 0 #087a35,0 8px 18px #0b8b3b24}
 .btn span{font-size:1.15rem}
 
+@keyframes pulse-btn{0%,100%{transform:scale(1);box-shadow:0 5px 0 #087a35,0 10px 25px #0b8b3b2b}50%{transform:scale(1.03);box-shadow:0 5px 0 #087a35,0 14px 30px #0b8b3b4d}}
+
 .announcement-bar{width:100%;min-height:36px;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 12px;background:#244b91;color:#fff;border-bottom:3px solid #d6a83b;text-align:center;font-size:.82rem;font-weight:900;line-height:1;white-space:normal}
 .announcement-bar span{color:#ffd75e;flex:0 0 auto}
 
@@ -95,7 +97,7 @@ h3{font-size:1.15rem;font-weight:800;color:#1d345b;margin:10px 0}
 .included-list{list-style:none;text-align:left;margin-bottom:16px}
 .included-list li{font-size:.9rem;color:#5f6f87;padding:7px 0;border-bottom:1px dashed #e5eaf0;display:flex;justify-content:space-between}
 .included-list li b{color:#172b4d;font-weight:900}
-.checkout-btn{width:100%;max-width:none;margin:0 auto}
+.checkout-btn{width:100%;max-width:none;margin:0 auto;animation:pulse-btn 2.5s infinite ease-in-out}
 .secure-note{font-size:.82rem;color:#5f6f87;margin-top:10px}
 .guarantee-mini{font-size:.82rem;color:#5f6f87;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px}
 
