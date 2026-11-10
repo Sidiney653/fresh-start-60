@@ -120,7 +120,8 @@ document.querySelectorAll('.testimonial-carousel').forEach((carousel)=>{
 });
 
 
-/* Popup de saída: mostra uma oferta especial uma única vez por sessão */
+
+/* Popup de saída: abre exclusivamente quando o visitante usa Voltar do navegador */
 (()=>{
  const popup=document.getElementById('exit-offer');
  if(!popup)return;
@@ -129,12 +130,13 @@ document.querySelectorAll('.testimonial-carousel').forEach((carousel)=>{
  const alreadyShown=()=>{try{return sessionStorage.getItem('inglesMapeadoExitOfferShown')==='1'}catch(_){return shown}};
  const markShown=()=>{shown=true;try{sessionStorage.setItem('inglesMapeadoExitOfferShown','1')}catch(_){}};
  const openPopup=()=>{
-  if(shown||alreadyShown())return;
+  if(shown||alreadyShown())return false;
   markShown();
   popup.classList.add('is-visible');
   popup.setAttribute('aria-hidden','false');
   document.body.style.overflow='hidden';
   popup.querySelector('.exit-offer-close')?.focus();
+  return true;
  };
  const closePopup=()=>{
   popup.classList.remove('is-visible');
@@ -144,19 +146,14 @@ document.querySelectorAll('.testimonial-carousel').forEach((carousel)=>{
  closeButtons.forEach(button=>button.addEventListener('click',closePopup));
  popup.addEventListener('click',event=>{if(event.target===popup)closePopup()});
  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&popup.classList.contains('is-visible'))closePopup()});
- document.addEventListener('mouseout',event=>{
-  if(event.clientY<=0&&event.relatedTarget===null)openPopup();
- });
- /* Em celulares, o botão voltar abre a oferta antes de sair da página. */
- if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)){
-  try{
-   history.pushState({exitOfferGuard:true},'',location.href);
-   window.addEventListener('popstate',()=>{
-    if(!shown&&!alreadyShown()){
-     openPopup();
-     history.pushState({exitOfferGuard:true},'',location.href);
-    }
-   });
-  }catch(_){/* Navegadores que bloqueiam histórico continuam com o comportamento padrão. */}
- }
+ /* Cria uma entrada de histórico para interceptar somente o clique em Voltar. */
+ try{
+  history.pushState({exitOfferGuard:true},'',location.href);
+  window.addEventListener('popstate',()=>{
+   if(!shown&&!alreadyShown()){
+    openPopup();
+    history.pushState({exitOfferGuard:true},'',location.href);
+   }
+  });
+ }catch(_){/* Se o navegador bloquear o histórico, a página continua navegável normalmente. */}
 })();
