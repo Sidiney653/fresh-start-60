@@ -118,3 +118,45 @@ document.querySelectorAll('.testimonial-carousel').forEach((carousel)=>{
  start();
  document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
 });
+
+
+/* Popup de saída: mostra uma oferta especial uma única vez por sessão */
+(()=>{
+ const popup=document.getElementById('exit-offer');
+ if(!popup)return;
+ const closeButtons=popup.querySelectorAll('.exit-offer-close,.exit-offer-decline');
+ let shown=false;
+ const alreadyShown=()=>{try{return sessionStorage.getItem('inglesMapeadoExitOfferShown')==='1'}catch(_){return shown}};
+ const markShown=()=>{shown=true;try{sessionStorage.setItem('inglesMapeadoExitOfferShown','1')}catch(_){}};
+ const openPopup=()=>{
+  if(shown||alreadyShown())return;
+  markShown();
+  popup.classList.add('is-visible');
+  popup.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  popup.querySelector('.exit-offer-close')?.focus();
+ };
+ const closePopup=()=>{
+  popup.classList.remove('is-visible');
+  popup.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+ };
+ closeButtons.forEach(button=>button.addEventListener('click',closePopup));
+ popup.addEventListener('click',event=>{if(event.target===popup)closePopup()});
+ document.addEventListener('keydown',event=>{if(event.key==='Escape'&&popup.classList.contains('is-visible'))closePopup()});
+ document.addEventListener('mouseout',event=>{
+  if(event.clientY<=0&&event.relatedTarget===null)openPopup();
+ });
+ /* Em celulares, o botão voltar abre a oferta antes de sair da página. */
+ if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)){
+  try{
+   history.pushState({exitOfferGuard:true},'',location.href);
+   window.addEventListener('popstate',()=>{
+    if(!shown&&!alreadyShown()){
+     openPopup();
+     history.pushState({exitOfferGuard:true},'',location.href);
+    }
+   });
+  }catch(_){/* Navegadores que bloqueiam histórico continuam com o comportamento padrão. */}
+ }
+})();
