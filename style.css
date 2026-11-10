@@ -30,3 +30,15 @@
 .preview-prev,.preview-next,.testimonial-prev,.testimonial-next{opacity:.78}
 @media(hover:none){.preview-prev,.preview-next,.testimonial-prev,.testimonial-next{opacity:.9}}
 @media(prefers-reduced-motion:reduce){.preview-track,.testimonial-track{scroll-behavior:auto}.preview-track img{transition:none}}
+
+a[href*="lovable.dev"],
+iframe[src*="lovable.dev"],
+div[style*="Edit with Lovable"],
+.lovable-badge {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  z-index: -9999 !important;
+}
