@@ -41,7 +41,7 @@ export const content = {
     ['Repasa', 'Vuelve al mapa para reforzar lo aprendido.']
   ],
   mechanismClose: 'Observa, lee, practica y repasa: cada tema en una página.',
-  gallery: Array.from({ length: 8 }, (_, i) => [`./assets/pagina-${String(i + 1).padStart(2, '0')}.webp`, `Página ${i + 1}`]),
+  gallery: [[new URL('./pagina-01.webp', import.meta.url).href, 'Página 1'],[new URL('./pagina-02.webp', import.meta.url).href, 'Página 2'],[new URL('./pagina-03.webp', import.meta.url).href, 'Página 3'],[new URL('./pagina-04.webp', import.meta.url).href, 'Página 4'],[new URL('./pagina-05.webp', import.meta.url).href, 'Página 5'],[new URL('./pagina-06.webp', import.meta.url).href, 'Página 6'],[new URL('./pagina-07.webp', import.meta.url).href, 'Página 7'],[new URL('./pagina-08.webp', import.meta.url).href, 'Página 8']],
   topicsSection: {
     eyebrow: 'QUÉ VAS A APRENDER',
     title: 'Todo lo que vas a dominar, tema por tema',
@@ -75,10 +75,10 @@ export const content = {
     ['Estudias solo, sin profesor', 'Cada ejercicio trae sus respuestas para que te corrijas al instante.']
   ],
   bonuses: [
-    { image: './assets/bono-1.webp', number: 'BONO 01', title: 'Habla desde el primer día', text: 'Diálogos ilustrados para cafeterías, tiendas, restaurantes, hoteles, aeropuertos y el trabajo, con traducción al español.', gain: 'Practica conversaciones reales desde el inicio.', value: 'US$ 9' },
-    { image: './assets/bono-2.webp', number: 'BONO 02', title: 'No caigas en estas trampas', text: 'Palabras que confunden, traducciones literales y errores frecuentes de quienes hablan español, con ejercicios y respuestas.', gain: 'Evita los errores más comunes al hablar inglés.', value: 'US$ 9' },
-    { image: './assets/bono-3.webp', number: 'BONO 03', title: 'Reto de 21 días', text: 'Un plan de actividades breves para saber qué estudiar y cómo practicar cada día, siguiendo tu progreso.', gain: 'Convierte el aprendizaje en un hábito diario.', value: 'US$ 9' },
-    { image: './assets/bono-4.webp', number: 'BONO 04', title: 'Mensajes listos en inglés', text: 'Modelos para WhatsApp, correo electrónico y situaciones profesionales: presentarte, pedir información, confirmar citas y más.', gain: 'Escribe en inglés con seguridad en situaciones reales.', value: 'US$ 9' }
+    { image: new URL('./bono-1.webp', import.meta.url).href, number: 'BONO 01', title: 'Habla desde el primer día', text: 'Diálogos ilustrados para cafeterías, tiendas, restaurantes, hoteles, aeropuertos y el trabajo, con traducción al español.', gain: 'Practica conversaciones reales desde el inicio.', value: 'US$ 9' },
+    { image: new URL('./bono-2.webp', import.meta.url).href, number: 'BONO 02', title: 'No caigas en estas trampas', text: 'Palabras que confunden, traducciones literales y errores frecuentes de quienes hablan español, con ejercicios y respuestas.', gain: 'Evita los errores más comunes al hablar inglés.', value: 'US$ 9' },
+    { image: new URL('./bono-3.webp', import.meta.url).href, number: 'BONO 03', title: 'Reto de 21 días', text: 'Un plan de actividades breves para saber qué estudiar y cómo practicar cada día, siguiendo tu progreso.', gain: 'Convierte el aprendizaje en un hábito diario.', value: 'US$ 9' },
+    { image: new URL('./bono-4.webp', import.meta.url).href, number: 'BONO 04', title: 'Mensajes listos en inglés', text: 'Modelos para WhatsApp, correo electrónico y situaciones profesionales: presentarte, pedir información, confirmar citas y más.', gain: 'Escribe en inglés con seguridad en situaciones reales.', value: 'US$ 9' }
   ],
   offer: { noTrick: 'Pago único. Sin mensualidad. Sin suscripción.' },
   included: [

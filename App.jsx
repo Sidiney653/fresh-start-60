@@ -16,7 +16,7 @@ function SectionTitle({ children, lead }) {
 
 function ProductComposition({ compact = false }) {
   return <div className={`product-shot${compact ? ' product-shot--compact' : ''}`}>
-    <img src="./assets/produto.webp" alt="Inglés Mapeado: guía visual y bonos"  loading={compact ? 'lazy' : undefined} fetchPriority={compact ? undefined : 'high'} />
+    <img src={new URL('./produto.webp', import.meta.url).href} alt="Inglés Mapeado: guía visual y bonos"  loading={compact ? 'lazy' : undefined} fetchPriority={compact ? undefined : 'high'} />
   </div>;
 }
 
@@ -138,7 +138,7 @@ export default function App() {
       <section className="hero"><div className="content content--860 hero-flow">
         <p className="hero-pill"><span aria-hidden="true" />{content.hero.badge}</p>
         <h1>{content.hero.titleBefore}<em>{content.hero.titleEmphasis}</em>{content.hero.titleAfter}</h1>
-        <div className="hero-media"><img className="hero-mockup" src="./assets/hero-mockup.webp" alt="Páginas reales de Inglés Mapeado" width="1524" height="815" fetchPriority="high" /></div>
+        <div className="hero-media"><img className="hero-mockup" src={new URL('./hero-mockup.webp', import.meta.url).href} alt="Páginas reales de Inglés Mapeado" width="1524" height="815" fetchPriority="high" /></div>
         <p className="hero-sub">{content.hero.subtitle.map(([text, emphasis], index) => emphasis ? <strong key={index}>{text}</strong> : <span key={index}>{text}</span>)}</p>
         <ul className="hero-bullets">{content.hero.bullets.map(item => <li key={item}><Check size={20}/><span>{item}</span></li>)}</ul>
         <CTA label="QUIERO VER EL MATERIAL" href="#previas" />
@@ -171,7 +171,7 @@ export default function App() {
       </div></section>
 
       <section className="section mid-pitch"><div className="content content--1040 mid-pitch-grid">
-        <div className="mid-pitch-media mid-pitch-media--generated"><img src="./assets/pagina-01.webp" alt="Portada de Inglés Mapeado" loading="lazy" /></div>
+        <div className="mid-pitch-media mid-pitch-media--generated"><img src={new URL('./pagina-01.webp', import.meta.url).href} alt="Portada de Inglés Mapeado" loading="lazy" /></div>
         <div className="mid-pitch-copy"><h2>¿Cuántas veces empezaste a estudiar inglés y lo dejaste por falta de claridad?</h2><p>Con los mapas, cada tema está organizado en una sola página: estructura, ejemplos, traducción y ejercicio. Abres, entiendes y practicas.</p><CTA /></div>
       </div></section>
 

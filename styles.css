@@ -1,6 +1,6 @@
-@font-face{font-family:'Fira Sans';src:url('/fonts/fira-sans-400.woff2') format('woff2');font-weight:400;font-display:swap}
-@font-face{font-family:'Fira Sans';src:url('/fonts/fira-sans-700.woff2') format('woff2');font-weight:700;font-display:swap}
-@font-face{font-family:'Fira Sans Condensed';src:url('/fonts/fira-condensed-800.woff2') format('woff2');font-weight:800;font-display:swap}
+@font-face{font-family:'Fira Sans';src:url('./fira-sans-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Fira Sans';src:url('./fira-sans-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Fira Sans Condensed';src:url('./fira-condensed-800.woff2') format('woff2');font-weight:800;font-display:swap}
 
 :root{
   --bg:#fbfcff;
